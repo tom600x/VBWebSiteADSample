@@ -27,19 +27,19 @@ Partial Public Class Startup
 
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
         h.GetOwinContext().Authentication.Challenge(
-    New AuthenticationProperties With {.RedirectUri = "/"},
-    OpenIdConnectAuthenticationDefaults.AuthenticationType)
+                New AuthenticationProperties With {.RedirectUri = "/"},
+             OpenIdConnectAuthenticationDefaults.AuthenticationType)
 
     End Sub
     Public Sub Configuration(ByVal app As IAppBuilder)
 
 
         app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType)
-        '  app.UseKentorOwinCookieSaver()
+        app.UseKentorOwinCookieSaver()
 
 
         app.UseCookieAuthentication(New CookieAuthenticationOptions With {
-        .CookieManager = New SystemWebCookieManager()
+             .CookieManager = New SystemWebCookieManager()
             })
 
 
@@ -48,7 +48,7 @@ Partial Public Class Startup
             .Authority = authority,
             .PostLogoutRedirectUri = postLogoutRedirectUri,
             .Notifications = New OpenIdConnectAuthenticationNotifications() With {
-                .AuthenticationFailed = Function(context) System.Threading.Tasks.Task.FromResult(0),
+                .AuthenticationFailed = Function(context) Task.FromResult(0),
                 .SecurityTokenValidated = Function(context)
                                               Dim claims = context.AuthenticationTicket.Identity.Claims
                                               Dim groups = From c In claims Where c.Type = "groups" Select c

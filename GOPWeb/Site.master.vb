@@ -15,6 +15,10 @@ Partial Class Site
             Dim h As HttpContext = HttpContext.Current
             Dim vbAuth = New VBAuth.Startup()
             vbAuth.login(h)
+        Else
+
+            Dim user As String = HttpContext.Current.User.Identity.Name
+
         End If
     End Sub
 End Class

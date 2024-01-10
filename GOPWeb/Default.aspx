@@ -10,7 +10,6 @@
      <dt>AuthenticationType</dt> 
      <dd><%= HttpContext.Current.User.Identity.AuthenticationType %></dd>
      <dt>Name</dt> <dd><%= HttpContext.Current.User.Identity.Name %></dd>
-   
  
  </dl>
 
